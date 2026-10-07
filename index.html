@@ -56,30 +56,40 @@ label.f{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
 .bdom{color:var(--muted);font-size:14px;margin-bottom:18px}
 .bstats{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px;background:var(--tint);border-radius:12px}
 .bstats .v{font-size:26px;font-weight:700;line-height:1.2}
-.bfoot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;font-size:14px;color:var(--muted);flex-wrap:wrap}
+.bsince{margin-top:12px;font-size:14px;color:var(--muted)}
+.bsince b{color:var(--ink)}
+.bfoot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px;font-size:14px;color:var(--muted);flex-wrap:wrap}
 .go{color:var(--accent);font-weight:600}
 .note{color:var(--faint);font-size:13px;margin:22px 0 40px}
 /* dashboard */
-.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin:30px 0 20px}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin:30px 0 14px}
 .head h1{font-size:32px;line-height:1.15;margin:0}
 .head .sub{color:var(--muted);margin-top:6px}
 .head .sub a{color:var(--accent);text-decoration:none;font-weight:500}
-.cmpbox{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
-.cmpbox .k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
-.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:3px;gap:3px;flex-wrap:wrap}
+.controls{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;margin-bottom:14px}
+.ctl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.ctl .k{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--faint)}
+.seg{display:inline-flex;background:var(--soft);border-radius:10px;padding:3px;gap:3px;flex-wrap:wrap}
 .seg button{border:0;background:none;padding:7px 12px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);text-align:left;line-height:1.25}
 .seg button small{display:block;font-weight:500;color:var(--faint);font-size:11.5px}
-.seg button[aria-pressed=true]{background:var(--tint);color:var(--ink)}
+.seg button[aria-pressed=true]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(19,34,42,.12)}
 .seg button[aria-pressed=true] small{color:var(--muted)}
+.fixed{background:var(--soft);border-radius:10px;padding:7px 12px;font-size:13px;font-weight:600;line-height:1.25}
+.fixed small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.olap{flex-basis:100%;font-size:13px;color:var(--muted);background:#FFF8E8;border:1px solid #F3E3B5;border-radius:10px;padding:8px 12px}
+.olap a{color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline}
 .grid{display:grid;gap:14px}
 .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .kpi .k{font-size:13px;font-weight:600;color:var(--muted)}
+.vrow{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
 .kpi .v{font-size:30px;font-weight:700;line-height:1.1;letter-spacing:-.01em}
 .kpi.small .v{font-size:24px}
+.spark{width:92px;height:30px;flex:none;overflow:visible}
 .kpi .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .kpi .was{font-size:13px;color:var(--faint)}
 .kpi .help{font-size:12.5px;color:var(--faint);line-height:1.4}
+.sparknote{font-size:12px;color:var(--faint);margin:8px 2px 0}
 .chip{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .chip.good{background:var(--goodbg);color:var(--good)}
 .chip.bad{background:var(--badbg);color:var(--bad)}
@@ -91,13 +101,13 @@ label.f{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
 .sech{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px}
 .sech h2{font-size:19px;margin:0 0 4px;line-height:1.3}
 .sech p{margin:0;color:var(--muted);font-size:14px;max-width:680px}
-.split{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}
-.chartbox{position:relative;height:270px}
+.split{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:center}
+.chartbox{position:relative;height:280px}
 .chartbox.tall{height:300px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px}
 table{border-collapse:collapse;width:100%;font-size:14px}
 th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
-th{font-size:12px;font-weight:600;color:var(--muted);background:#F8FAFB;white-space:nowrap;position:sticky;top:0}
+th{font-size:12px;font-weight:600;color:var(--muted);background:#F8FAFB;white-space:nowrap}
 tr:last-child td{border-bottom:0}
 td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 td.kw{font-weight:600;min-width:180px}
@@ -107,7 +117,6 @@ td.url a{text-decoration:none;color:var(--ink)}
 td.url a:hover{color:var(--accent);text-decoration:underline}
 tr.tot td{font-weight:700;background:#F8FAFB}
 .low{color:var(--faint);font-style:italic}
-.dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .pill{background:var(--soft);border-radius:10px;padding:8px 12px;font-size:13px;color:var(--muted)}
 .pill b{display:block;font-size:20px;color:var(--ink);line-height:1.2}
@@ -120,15 +129,19 @@ tr.tot td{font-weight:700;background:#F8FAFB}
 .tag{font-size:11px;font-weight:600;color:var(--faint);border:1px solid var(--line);border-radius:6px;padding:1px 6px;margin-left:6px;white-space:nowrap}
 .sm{display:none}
 .foot{color:var(--faint);font-size:12.5px;margin:26px 0 40px;line-height:1.6}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted);margin-top:10px}
 @media (max-width:900px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.split{grid-template-columns:1fr}}
-@media (max-width:560px){.wrap{padding:0 16px}.head h1{font-size:26px}.h1{font-size:25px}.kpi .v{font-size:24px}.kpi.small .v{font-size:20px}.sec{padding:16px}
-  .tabs{margin-left:0;width:100%}.tabs a{flex:1;text-align:center}.topin{padding:10px 0;gap:10px}.chartbox{height:230px}.bstats .v{font-size:22px}}
-@media (max-width:560px){.top{position:static}.topin{gap:8px}.top .mark{flex:1}.top .mark span{display:none}
-  .tabs{order:3}.ghost{padding:6px 10px;font-size:13px}th.pg,td.pg,th.vol,td.vol,th.hp,td.hp{display:none}th,td{padding:8px 6px}.chip{font-size:11.5px;padding:2px 6px}table{font-size:13px}td.kw{min-width:0}td.url{min-width:96px;word-break:break-all}td.url{min-width:180px}.topin{padding:10px 16px}.lg{display:none}.sm{display:inline}
-  table.rk th,table.rk td{padding:8px 6px}
-  table.pt,table.kt{table-layout:fixed}table.pt th:nth-child(1){width:44%}table.pt th:nth-child(2){width:16%}table.pt th:nth-child(3){width:24%}table.pt th:nth-child(5){width:16%}
-  table.kt th:nth-child(1){width:38%}table.kt th:nth-child(4){width:19%}table.kt th:nth-child(5){width:19%}table.kt th:nth-child(6){width:24%}td.url{min-width:0}table.rk td:first-child{min-width:96px}}
+@media (max-width:560px){.wrap{padding:0 16px}.head h1{font-size:26px}.h1{font-size:25px}.kpi{padding:14px}.kpi .v{font-size:23px}.kpi.small .v{font-size:20px}.sec{padding:16px}
+  .spark{width:64px;height:24px}.vrow{flex-wrap:wrap}
+  .top{position:static}.topin{padding:10px 16px;gap:8px}.top .mark{flex:1}.top .mark span{display:none}
+  .tabs{order:3;margin-left:0;width:100%}.tabs a{flex:1;text-align:center}.ghost{padding:6px 10px;font-size:13px}
+  .controls{padding:12px;gap:12px}.seg button{padding:7px 9px}
+  .chartbox{height:240px}.bstats .v{font-size:22px}
+  th.pg,td.pg,th.vol,td.vol,th.hp,td.hp{display:none}th,td{padding:8px 6px}table{font-size:13px}.chip{font-size:11.5px;padding:2px 6px}
+  td.kw{min-width:0}td.url{min-width:0;word-break:break-all}.lg{display:none}.sm{display:inline}
+  table.pt,table.kt{table-layout:fixed}
+  table.pt th:nth-child(1){width:44%}table.pt th:nth-child(2){width:16%}table.pt th:nth-child(3){width:24%}table.pt th:nth-child(5){width:16%}
+  table.kt th:nth-child(1){width:38%}table.kt th:nth-child(4){width:19%}table.kt th:nth-child(5){width:19%}table.kt th:nth-child(6){width:24%}
+  table.rk td:first-child{min-width:92px}}
 </style>
 </head>
 <body>
@@ -140,7 +153,7 @@ tr.tot td{font-weight:700;background:#F8FAFB}
     <h1>SEO dashboard</h1>
     <p>JB Skincare and Skinolin</p>
     <label class="f" for="pw">Password</label>
-    <input class="inp" id="pw" name="password" type="password" autocomplete="current-password" required autofocus>
+    <input class="inp" id="pw" name="password" type="password" autocomplete="current-password" autocapitalize="none" spellcheck="false" required autofocus>
     <button class="btn full" id="unlockbtn" type="submit">Open dashboard</button>
     <div class="err" id="lockerr" role="alert"></div>
     <div class="fine">The figures stay encrypted until the password is entered.</div>
@@ -154,7 +167,10 @@ tr.tot td{font-weight:700;background:#F8FAFB}
 'use strict';
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const nf = new Intl.NumberFormat('en-IN');
-const S = {data:null, brand:null, cmp:'previous', rank:'all', kwq:'', kwb:'all', kwsort:'now', kwall:false, tm:'c', mm:'c', tq:'all', charts:{}};
+const PIDS = ['7', '28', '90', 'since'];
+const PSHORT = {'7':'7 days', '28':'28 days', '90':'3 months', 'since':'Since we started'};
+const PREV = {'7':'Previous 7 days', '28':'Previous 28 days', '90':'Previous 3 months'};
+const S = {data:null, brand:null, period:'28', cmp:'previous', rank:'all', kwq:'', kwb:'all', kwsort:'now', kwall:false, tm:'c', mm:'c', tq:'all', charts:{}};
 const store = {get(k){try{return sessionStorage.getItem(k)}catch(e){return null}}, set(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}, del(k){try{sessionStorage.removeItem(k)}catch(e){}}};
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -165,7 +181,8 @@ let ENC = null;
 async function loadEnc(){ if (!ENC){ const r = await fetch('data.enc.json', {cache:'no-store'}); if (!r.ok) throw new Error('load'); ENC = await r.json(); } return ENC; }
 async function decrypt(pw){
   const e = await loadEnc();
-  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+  const p = e.norm === 'trim+lower' ? pw.trim().toLowerCase() : pw;
+  const base = await crypto.subtle.importKey('raw', new TextEncoder().encode(p), 'PBKDF2', false, ['deriveKey']);
   const key = await crypto.subtle.deriveKey({name:'PBKDF2', salt:b64(e.salt), iterations:e.iter, hash:'SHA-256'}, base, {name:'AES-GCM', length:256}, false, ['decrypt']);
   let pt;
   try { pt = await crypto.subtle.decrypt({name:'AES-GCM', iv:b64(e.iv)}, key, b64(e.ct)); } catch (x) { throw new Error('password'); }
@@ -177,6 +194,8 @@ const P = iso => { const [y,m,d] = iso.split('-').map(Number); return {y,m,d}; }
 const dm = iso => { const p = P(iso); return `${p.d} ${MON[p.m-1]}`; };
 const rng = (a,b) => { const A = P(a), B = P(b); return A.y === B.y ? `${dm(a)} to ${dm(b)} ${B.y}` : `${dm(a)} ${A.y} to ${dm(b)} ${B.y}`; };
 const N = x => nf.format(x);
+const dayNum = iso => Date.UTC(...(([y,m,d]) => [y, m - 1, d])(iso.split('-').map(Number))) / 864e5;
+const overlapDays = (r1, r2) => Math.max(0, Math.min(dayNum(r1[1]), dayNum(r2[1])) - Math.max(dayNum(r1[0]), dayNum(r2[0])) + 1);
 function dCount(now, was){
   if (was == null) return {t:'', c:'flat'};
   if (!was) return now > 0 ? {t:'New', c:'good'} : {t:'No change', c:'flat'};
@@ -193,10 +212,24 @@ function dPos(now, was, words){
 }
 const H = (lg, sm) => `<span class="lg">${lg}</span><span class="sm">${sm}</span>`;
 const chip = d => `<span class="chip ${d.c}">${d.t}</span>`;
-const bucketOf = p => { const r = Math.floor(p + 0.5); return r <= 3 ? 0 : r <= 10 ? 1 : r <= 20 ? 2 : 3; };
-const BL = ['Top 3', '4 to 10', '11 to 20', '21 and lower'];
-const cmpName = () => S.cmp === 'previous' ? 'Previous 28 days' : 'Before we started';
+function bandOf(p){ const r = Math.floor(p + 0.5); return r <= 3 ? 0 : r <= 10 ? 1 : r <= 20 ? 2 : r <= 50 ? 3 : 4; }
 function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
+const per = b => b.periods[S.period];
+const role = () => S.period === 'since' ? 'start' : S.cmp;
+function nowName(){ return S.period === 'since' ? 'Since we started' : ({'7':'Last 7 days','28':'Last 28 days','90':'Last 3 months'})[S.period]; }
+function cmpName(b){ const p = per(b); return S.period === 'since' ? `The ${p.days} days before` : S.cmp === 'previous' ? PREV[S.period] : 'Before we started'; }
+function spark(vals, color, invert){
+  const v = vals.map(x => x == null ? null : +x), ok = v.filter(x => x != null);
+  if (ok.length < 2) return '';
+  const lo = Math.min(...ok), hi = Math.max(...ok), W = 92, Hh = 30, pad = 3;
+  const y = x => { const t = hi === lo ? 0.5 : (x - lo) / (hi - lo); return pad + (invert ? t : 1 - t) * (Hh - 2 * pad); };
+  const pts = v.map((x, i) => x == null ? null : [(i / (v.length - 1)) * (W - 2 * pad) + pad, y(x)]).filter(Boolean);
+  const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+  const l = pts[pts.length - 1];
+  return `<svg class="spark" viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none" role="img" aria-label="Last 12 weeks"><title>Week by week, last 12 weeks</title>
+    <path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="${l[0].toFixed(1)}" cy="${l[1].toFixed(1)}" r="2.6" fill="${color}"/></svg>`;
+}
 
 // ---------- screens ----------
 function show(id){ for (const s of ['lock','choose','dash']) $('#' + s).hidden = s !== id; window.scrollTo(0, 0); }
@@ -210,65 +243,79 @@ function renderChoose(){
   const d = S.data;
   document.documentElement.style.setProperty('--accent', '#1F4E51'); document.documentElement.style.setProperty('--tint', '#E4F2EF');
   $('#choose').innerHTML = topbar(null) + `<main class="wrap"><h1 class="h1">Choose a brand</h1>
-    <p class="lede">How each site is doing in Google Search: the last 28 days compared with the 28 days before. Updated ${esc(d.updated)}.</p>
-    <div class="brands">${d.brands.map(b => { const L = b.totals.latest, V = b.totals.previous; return `
+    <p class="lede">How each site is doing in Google Search. The cards show the last 28 days against the 28 days before. Updated ${esc(d.updated)}, refreshed every Monday.</p>
+    <div class="brands">${d.brands.map(b => { const p = b.periods['28'], L = b.win[p.latest], V = b.win[p.previous], s = b.periods.since, SL = b.win[s.latest], SB = b.win[s.start]; return `
       <a class="bcard" href="#${b.id}" style="--accent:${b.accent};--tint:${b.tint}">
         <div class="bname">${esc(b.name)}</div><div class="bdom">${esc(b.domain)}</div>
         <div class="bstats"><div><div class="muted" style="font-size:13px">Clicks from Google</div><div class="v">${N(L.clicks)}</div>${chip(dCount(L.clicks, V.clicks))}</div>
         <div><div class="muted" style="font-size:13px">Views in Google</div><div class="v">${N(L.impr)}</div>${chip(dCount(L.impr, V.impr))}</div></div>
+        <div class="bsince">Since we started on 1 Sep: <b>${N(SL.clicks)} clicks</b> against ${N(SB.clicks)} in the ${s.days} days before ${chip(dCount(SL.clicks, SB.clicks))}</div>
         <div class="bfoot"><span>October plan: ${b.facts.done[0]} of ${b.facts.done[1]} live</span><span class="go">Open dashboard →</span></div></a>`; }).join('')}</div>
-    <p class="note">Last 28 days: ${rng(...d.brands[0].windows.latest)}. Google publishes Search Console data two to three days late.</p></main>`;
+    <p class="note">Last 28 days: ${rng(...d.brands[0].win[d.brands[0].periods['28'].latest].range)}. Google publishes Search Console data two to three days late.</p></main>`;
   show('choose');
 }
-function kpi(label, now, was, kind, help, small){
+function kpi(label, now, was, kind, help, sp, small){
   let v, dl, w;
   if (kind === 'ctr'){ v = now.toFixed(1) + '%'; dl = dPts(now, was); w = was.toFixed(1) + '%'; }
   else if (kind === 'pos'){ v = now == null ? 'n/a' : now.toFixed(1); dl = dPos(now, was, true); w = was == null ? 'n/a' : was.toFixed(1); }
   else { v = N(now); dl = dCount(now, was); w = N(was); }
-  return `<div class="kpi${small ? ' small' : ''}"><div class="k">${label}</div><div class="v">${v}</div>
+  return `<div class="kpi${small ? ' small' : ''}"><div class="k">${label}</div><div class="vrow"><div class="v">${v}</div>${sp || ''}</div>
     <div class="row">${chip(dl)}<span class="was">was ${w}</span></div><div class="help">${help}</div></div>`;
 }
 function renderDash(){
   const d = S.data, b = d.brands.find(x => x.id === S.brand);
   if (!b){ location.hash = ''; return; }
   document.documentElement.style.setProperty('--accent', b.accent); document.documentElement.style.setProperty('--tint', b.tint);
-  const W = b.windows, L = b.totals.latest, C = b.totals[S.cmp], f = b.facts;
-  const segBtn = (k, label, r) => `<button type="button" data-cmp="${k}" aria-pressed="${S.cmp === k}">${label}<small>${r}</small></button>`;
+  const p = per(b), L = b.win[p.latest], C = b.win[p[role()]], f = b.facts, ac = b.accent;
+  const sw = b.weekly.slice(-12), col = k => sw.map(w => w[k]);
+  const pbtn = pid => { const q = b.periods[pid], r = b.win[q.latest].range; return `<button type="button" data-period="${pid}" aria-pressed="${S.period === pid}">${PSHORT[pid]}<small>${pid === 'since' ? 'from ' + dm(r[0]) : rng(...r)}</small></button>`; };
+  const cbtn = (k, label) => `<button type="button" data-cmp="${k}" aria-pressed="${S.cmp === k}">${label}<small>${rng(...b.win[p[k]].range)}</small></button>`;
+  let cmpCtl;
+  if (S.period === 'since') cmpCtl = `<div class="fixed">The ${p.days} days before we started<small>${rng(...b.win[p.start].range)}</small></div>`;
+  else cmpCtl = `<div class="seg" role="group" aria-label="Compare with">${cbtn('previous', PREV[S.period])}${cbtn('start', 'Before we started')}</div>`;
+  let olap = '';
+  if (S.period !== 'since'){
+    const o = overlapDays(b.win[p.previous].range, b.win[p.start].range);
+    if (o > 0) olap = `<div class="olap">The ${PREV[S.period].toLowerCase()} and the ${p.days} days before we started share ${o} of their ${p.days} days, so both comparisons show similar numbers for now. For a clean before and after, use <a data-period="since">Since we started</a>.</div>`;
+  }
   const pct = Math.round(f.done[0] / f.done[1] * 100);
   $('#dash').innerHTML = topbar(b.id) + `<main class="wrap">
-  <div class="head"><div><h1>${esc(b.name)}</h1><div class="sub"><a href="https://${esc(b.domain)}/" target="_blank" rel="noopener">${esc(b.domain)}</a> · Last 28 days: ${rng(...W.latest)}</div></div>
-    <div class="cmpbox"><span class="k">Compare with</span><div class="seg" role="group" aria-label="Compare with">
-      ${segBtn('previous', 'Previous 28 days', rng(...W.previous))}${segBtn('start', 'Before we started', rng(...W.start))}</div></div></div>
+  <div class="head"><div><h1>${esc(b.name)}</h1><div class="sub"><a href="https://${esc(b.domain)}/" target="_blank" rel="noopener">${esc(b.domain)}</a> · ${nowName()}: ${rng(...L.range)}</div></div></div>
+  <div class="controls">
+    <div class="ctl"><span class="k">Period</span><div class="seg" role="group" aria-label="Period">${PIDS.map(pbtn).join('')}</div></div>
+    <div class="ctl"><span class="k">Compare with</span>${cmpCtl}</div>${olap}
+  </div>
 
   <div class="grid g4">
-    ${kpi('Clicks from Google', L.clicks, C.clicks, 'n', 'People who clicked a result for the site.')}
-    ${kpi('Views in Google', L.impr, C.impr, 'n', 'Times a page of the site was shown in results.')}
-    ${kpi('Click rate', L.ctr, C.ctr, 'ctr', 'Share of views that became a click.')}
-    ${kpi('Average position', L.pos, C.pos, 'pos', 'Lower is better. Page one is positions 1 to 10.')}
+    ${kpi('Clicks from Google', L.clicks, C.clicks, 'n', 'People who clicked a result for the site.', spark(col('c'), ac))}
+    ${kpi('Views in Google', L.impr, C.impr, 'n', 'Times a page of the site was shown in results.', spark(col('i'), ac))}
+    ${kpi('Click rate', L.ctr, C.ctr, 'ctr', 'Share of views that became a click.', spark(col('ctr'), ac))}
+    ${kpi('Average position', L.pos, C.pos, 'pos', 'Lower is better. Page one is positions 1 to 10.', spark(col('pos'), ac, true))}
   </div>
   <div class="grid g4" style="margin-top:14px">
-    ${kpi('Clicks without the brand name', L.nb_clicks, C.nb_clicks, 'n', 'New customers who did not search for the name.', 1)}
-    ${kpi('Views without the brand name', L.nb_impr, C.nb_impr, 'n', 'Shown to people still choosing a brand.', 1)}
-    ${kpi('Different searches showing the site', L.queries, C.queries, 'n', 'More searches means wider reach.', 1)}
-    <div class="kpi small"><div class="k">Pages in Google's index</div><div class="v">${esc(f.indexed[1])}</div><div class="help">At the start: ${esc(f.indexed[0])}. Indexed pages can appear in search.</div></div>
+    ${kpi('Clicks without the brand name', L.nb_clicks, C.nb_clicks, 'n', 'New customers who did not search for the name.', spark(col('nbc'), ac), 1)}
+    ${kpi('Views without the brand name', L.nb_impr, C.nb_impr, 'n', 'Shown to people still choosing a brand.', spark(col('nbi'), ac), 1)}
+    ${kpi('Different searches showing the site', L.queries, C.queries, 'n', 'More searches means wider reach.', spark(col('q'), ac), 1)}
+    <div class="kpi small"><div class="k">Pages in Google's index</div><div class="vrow"><div class="v">${esc(f.indexed[1])}</div></div><div class="help">At the start: ${esc(f.indexed[0])}. Indexed pages can appear in search.</div></div>
   </div>
-  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:14px">
+  <p class="sparknote">The small lines show the last 12 weeks, week by week. For position, up means better.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px">
     <div class="kpi small"><div class="k">October plan: pages and articles live</div><div class="v">${f.done[0]} of ${f.done[1]}</div><div class="bar"><i style="width:${pct}%"></i></div><div class="help">${pct}% of this month's planned work is live on the site.</div></div>
     <div class="kpi small"><div class="k">Domain Rating (Ahrefs, 0 to 100)</div><div class="v">${esc(String(f.dr[1]).split(' (')[0])}</div><div class="help">Strength of links pointing to the site, ${esc((String(f.dr[1]).split(' (')[1] || '').replace(')', ''))}. It moves over months, not weeks.</div></div>
   </div>
 
   <section class="sec"><div class="sech"><div><h2>Where the site ranks in Google</h2>
-    <p>Searches that showed the site at least ${d.min_views} times in the 28 days, grouped by their average position. Page one of Google is positions 1 to 10.</p></div>
+    <p>Searches that showed the site at least ${p.min_views} times in the period, grouped by their average position. Page one of Google is positions 1 to 10, page two is 11 to 20.</p></div>
     <div class="seg" role="group" aria-label="Searches"><button type="button" data-rank="all" aria-pressed="${S.rank === 'all'}">All searches</button><button type="button" data-rank="nb" aria-pressed="${S.rank === 'nb'}">Without the brand name</button></div></div>
     <div class="split"><div class="chartbox"><canvas id="chRank" aria-label="Searches by position"></canvas></div><div class="tw" id="rankTable"></div></div></section>
 
   <section class="sec"><div class="sech"><div><h2>Tracked keywords</h2>
-    <p>The ${b.keywords.length} keywords our October plan pages are built to win, with Google's average position for each window. 1 is the top of the page.</p></div></div>
+    <p>The ${b.keywords.length} keywords our October plan pages are built to win, with Google's average position in each period. 1 is the top of the page.</p></div></div>
     <div class="pills" id="kwPills"></div>
     <div class="tools"><input class="inp" id="kwq" type="search" placeholder="Search keywords or pages" value="${esc(S.kwq)}" aria-label="Search keywords or pages">
-      <select class="sel" id="kwb" aria-label="Position now">${[['all','All positions'],['0','Top 3 now'],['1','4 to 10 now'],['2','11 to 20 now'],['3','21 and lower now'],['none','Not showing yet']].map(([v,l]) => `<option value="${v}"${S.kwb === v ? ' selected' : ''}>${l}</option>`).join('')}</select>
+      <select class="sel" id="kwb" aria-label="Position now">${[['all','All positions'],['0','Top 3 now'],['1','4 to 10 now'],['2','11 to 20 now'],['3','21 to 50 now'],['4','51 and lower now'],['none','Not showing yet']].map(([v,l]) => `<option value="${v}"${S.kwb === v ? ' selected' : ''}>${l}</option>`).join('')}</select>
       <select class="sel" id="kws" aria-label="Sort">${[['now','Sort: position now'],['move','Sort: biggest move up'],['vol','Sort: searches a month']].map(([v,l]) => `<option value="${v}"${S.kwsort === v ? ' selected' : ''}>${l}</option>`).join('')}</select></div>
-    <div class="tw"><table class="kt"><thead><tr><th>Keyword</th><th class="pg">Page</th><th class="n vol">Searches a month</th><th class="n">${H(cmpName(), 'Before')}</th><th class="n">${H('Last 28 days', 'Now')}</th><th class="n">Change</th></tr></thead><tbody id="kwBody"></tbody></table></div>
+    <div class="tw"><table class="kt"><thead><tr><th>Keyword</th><th class="pg">Page</th><th class="n vol">Searches a month</th><th class="n">${H(cmpName(b), 'Before')}</th><th class="n">${H(nowName(), 'Now')}</th><th class="n">Change</th></tr></thead><tbody id="kwBody"></tbody></table></div>
     <div class="more" id="kwMore"></div></section>
 
   <section class="sec"><div class="sech"><div><h2>Week by week</h2><p>The last 26 weeks, 7 days each, ending ${dm(b.last)}. The line marks when our work began.</p></div>
@@ -279,14 +326,14 @@ function renderDash(){
     <div class="seg" role="group" aria-label="Measure"><button type="button" data-mm="c" aria-pressed="${S.mm === 'c'}">Clicks</button><button type="button" data-mm="i" aria-pressed="${S.mm === 'i'}">Views</button></div></div>
     <div class="chartbox tall"><canvas id="chMonth" aria-label="Monthly history"></canvas></div></section>
 
-  <section class="sec"><div class="sech"><div><h2>Top pages</h2><p>Pages with the most clicks in the last 28 days.</p></div></div>
+  <section class="sec"><div class="sech"><div><h2>Top pages</h2><p>Pages with the most clicks in the period.</p></div></div>
     <div class="tw" id="pagesTable"></div></section>
 
   <section class="sec"><div class="sech"><div><h2>Top searches</h2><p id="tqNote"></p></div>
     <div class="seg" role="group" aria-label="Searches"><button type="button" data-tq="all" aria-pressed="${S.tq === 'all'}">Most clicks</button><button type="button" data-tq="nb" aria-pressed="${S.tq === 'nb'}">Without the brand name</button></div></div>
     <div class="tw" id="queriesTable"></div></section>
 
-  <p class="foot">Source: Google Search Console, final data to ${dm(b.last)} ${P(b.last).y}. Positions are Google's averages over each window, so a search that moves around shows its middle. Indexed pages come from Google's URL Inspection tool and Domain Rating from Ahrefs, on the dates shown. Prepared by LocknCode. Updated ${esc(d.updated)}.</p>
+  <p class="foot">Source: Google Search Console, final data to ${dm(b.last)} ${P(b.last).y}. Positions are Google's averages over each period. Indexed pages come from Google's URL Inspection tool and Domain Rating from Ahrefs, on the dates shown. Prepared by LocknCode. Updated ${esc(d.updated)}; the numbers refresh automatically every Monday.</p>
   </main>`;
   show('dash');
   renderRank(b); renderKw(b); renderPages(b); renderQueries(b); drawCharts(b);
@@ -294,30 +341,31 @@ function renderDash(){
 
 // ---------- sections ----------
 function renderRank(b){
-  const bk = S.rank === 'all' ? b.buckets : b.buckets_nb;
-  const was = bk[S.cmp], now = bk.latest;
-  const rows = BL.map((l, i) => { const x = now[i] - was[i]; const c = i === 3 ? 'flat' : x > 0 ? 'good' : x < 0 ? 'bad' : 'flat';
+  const p = per(b), bk = S.rank === 'all' ? p.bands : p.bands_nb, BL = S.data.bands;
+  const was = bk[role()], now = bk.latest;
+  const rows = BL.map((l, i) => { const x = now[i] - was[i]; const c = i >= 3 ? 'flat' : x > 0 ? 'good' : x < 0 ? 'bad' : 'flat';
     return `<tr><td>${l}</td><td class="n">${N(was[i])}</td><td class="n">${N(now[i])}</td><td class="n">${x ? chip({t:(x > 0 ? '+' : '') + x, c}) : chip({t:'No change', c:'flat'})}</td></tr>`; }).join('');
   const sw = was.reduce((a, c) => a + c, 0), sn = now.reduce((a, c) => a + c, 0), p1w = was[0] + was[1], p1n = now[0] + now[1];
-  $('#rankTable').innerHTML = `<table class="rk"><thead><tr><th>Position</th><th class="n">${H(cmpName(), 'Before')}</th><th class="n">${H('Last 28 days', 'Now')}</th><th class="n">Change</th></tr></thead><tbody>${rows}
+  $('#rankTable').innerHTML = `<table class="rk"><thead><tr><th>Position</th><th class="n">${H(cmpName(b), 'Before')}</th><th class="n">${H(nowName(), 'Now')}</th><th class="n">Change</th></tr></thead><tbody>${rows}
     <tr class="tot"><td>On page one (1 to 10)</td><td class="n">${N(p1w)}</td><td class="n">${N(p1n)}</td><td class="n">${chip(dCount(p1n, p1w))}</td></tr>
     <tr class="tot"><td>All searches counted</td><td class="n">${N(sw)}</td><td class="n">${N(sn)}</td><td class="n">${chip(dCount(sn, sw))}</td></tr></tbody></table>`;
 }
 function kwRows(b){
-  return b.keywords.map(k => { const n = k.w.latest, w = k.w[S.cmp];
+  const p = per(b), Lw = p.latest, Cw = p[role()];
+  return b.keywords.map(k => { const n = k.w[Lw], w = k.w[Cw];
     return {k, now: n ? n[0] : null, nowI: n ? n[1] : 0, was: w ? w[0] : null, wasI: w ? w[1] : 0,
       move: n && w ? +(w[0] - n[0]).toFixed(1) : null, st: n && w ? 'both' : n ? 'new' : w ? 'lost' : 'none'}; });
 }
-function posCell(p, i){ if (p == null) return '<span class="muted">not showing</span>'; return i < 3 ? `<span class="low" title="Fewer than 3 views in the 28 days">${p.toFixed(1)}</span>` : p.toFixed(1); }
+function posCell(pos, views, mv){ if (pos == null) return '<span class="muted">not showing</span>'; return views < mv ? `<span class="low" title="Fewer than ${mv} views in the period">${pos.toFixed(1)}</span>` : pos.toFixed(1); }
 function renderKw(b){
-  const all = kwRows(b);
-  const page1 = all.filter(r => r.now != null && bucketOf(r.now) <= 1).length;
+  const all = kwRows(b), mv = per(b).min_views;
+  const page1 = all.filter(r => r.now != null && bandOf(r.now) <= 1).length;
   const up = all.filter(r => r.move != null && r.move > 0.05).length, down = all.filter(r => r.move != null && r.move < -0.05).length;
   const nw = all.filter(r => r.st === 'new').length, none = all.filter(r => r.st === 'none').length;
   $('#kwPills').innerHTML = `<div class="pill"><b>${page1}</b>on page one now</div><div class="pill good"><b>${up}</b>moved up</div><div class="pill bad"><b>${down}</b>moved down</div><div class="pill good"><b>${nw}</b>newly showing</div><div class="pill"><b>${none}</b>not showing yet</div>`;
   const q = S.kwq.trim().toLowerCase();
   let rows = all.filter(r => (!q || r.k.kw.toLowerCase().includes(q) || r.k.page.toLowerCase().includes(q)) &&
-    (S.kwb === 'all' || (S.kwb === 'none' ? r.now == null : r.now != null && String(bucketOf(r.now)) === S.kwb)));
+    (S.kwb === 'all' || (S.kwb === 'none' ? r.now == null : r.now != null && String(bandOf(r.now)) === S.kwb)));
   const big = 1e9;
   if (S.kwsort === 'vol') rows.sort((a, c) => (c.k.vol ?? -1) - (a.k.vol ?? -1));
   else if (S.kwsort === 'move') rows.sort((a, c) => (c.move ?? (c.st === 'new' ? 0.01 : -big)) - (a.move ?? (a.st === 'new' ? 0.01 : -big)));
@@ -326,23 +374,24 @@ function renderKw(b){
   $('#kwBody').innerHTML = rows.slice(0, lim).map(r => {
     const ch = r.st === 'both' ? chip(dPos(r.now, r.was)) : r.st === 'new' ? chip({t:'New', c:'good'}) : r.st === 'lost' ? chip({t:H('Dropped out', 'Out'), c:'bad'}) : '';
     return `<tr><td class="kw">${esc(r.k.kw)}</td><td class="pg">${esc(r.k.page)}</td><td class="n vol">${r.k.vol != null ? N(r.k.vol) : '<span class="muted">n/a</span>'}</td>
-      <td class="n">${posCell(r.was, r.wasI)}</td><td class="n">${posCell(r.now, r.nowI)}</td><td class="n">${ch}</td></tr>`; }).join('') ||
+      <td class="n">${posCell(r.was, r.wasI, mv)}</td><td class="n">${posCell(r.now, r.nowI, mv)}</td><td class="n">${ch}</td></tr>`; }).join('') ||
     '<tr><td colspan="6" class="muted">No keywords match.</td></tr>';
   $('#kwMore').innerHTML = rows.length > 30 ? `<button class="ghost" type="button" data-act="kwall">${S.kwall ? 'Show fewer' : `Show all ${rows.length}`}</button>` : '';
 }
-function trio(w){ return w ? w : null; }
 const dec = s => { try { return decodeURIComponent(s); } catch (e) { return s; } };
 function renderPages(b){
-  $('#pagesTable').innerHTML = `<table class="pt"><thead><tr><th>Page</th><th class="n">Clicks</th><th class="n">${H('vs ' + cmpName().toLowerCase(), 'Change')}</th><th class="n hp">Views</th><th class="n">Position</th></tr></thead><tbody>` +
-    b.pages.map(p => { const n = p.w.latest, w = trio(p.w[S.cmp]);
-      return `<tr><td class="url"><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(dec(p.path))}</a></td><td class="n">${N(n[0])}</td><td class="n">${w ? chip(dCount(n[0], w[0])) : chip({t:'New', c:'good'})}</td><td class="n hp">${N(n[1])}</td><td class="n">${n[2].toFixed(1)}</td></tr>`; }).join('') + '</tbody></table>';
+  const p = per(b), r = role();
+  $('#pagesTable').innerHTML = `<table class="pt"><thead><tr><th>Page</th><th class="n">Clicks</th><th class="n">${H('vs ' + cmpName(b).toLowerCase(), 'Change')}</th><th class="n hp">Views</th><th class="n">Position</th></tr></thead><tbody>` +
+    p.pages.map(x => { const n = x.v.latest, w = x.v[r];
+      return `<tr><td class="url"><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(dec(x.path))}</a></td><td class="n">${N(n[0])}</td><td class="n">${w ? chip(dCount(n[0], w[0])) : chip({t:'New', c:'good'})}</td><td class="n hp">${N(n[1])}</td><td class="n">${n[2].toFixed(1)}</td></tr>`; }).join('') + '</tbody></table>';
 }
 function renderQueries(b){
-  const list = S.tq === 'all' ? b.queries : b.queries_nb;
-  $('#tqNote').textContent = S.tq === 'all' ? 'The searches that brought the most clicks in the last 28 days (searches with at least 3 views).' : 'Searches without the brand name, by views: where new customers already see the site.';
-  $('#queriesTable').innerHTML = `<table><thead><tr><th>Search</th><th class="n">Clicks</th><th class="n hp">Views</th><th class="n">Position</th><th class="n">${H('vs ' + cmpName().toLowerCase(), 'Change')}</th></tr></thead><tbody>` +
-    list.map(q => { const n = q.w.latest, w = q.w[S.cmp];
-      return `<tr><td class="kw">${esc(q.q)}${q.brand ? '<span class="tag">brand</span>' : ''}</td><td class="n">${N(n[0])}</td><td class="n hp">${N(n[1])}</td><td class="n">${n[2].toFixed(1)}</td><td class="n">${w ? chip(dPos(n[2], w[2])) : chip({t:'New', c:'good'})}</td></tr>`; }).join('') + '</tbody></table>';
+  const p = per(b), r = role(), list = S.tq === 'all' ? p.queries : p.queries_nb;
+  $('#tqNote').textContent = S.tq === 'all' ? `The searches that brought the most clicks in the period (searches with at least ${p.min_views} views).` : 'Searches without the brand name, by views: where new customers already see the site.';
+  $('#queriesTable').innerHTML = `<table><thead><tr><th>Search</th><th class="n">Clicks</th><th class="n hp">Views</th><th class="n">Position</th><th class="n">${H('vs ' + cmpName(b).toLowerCase(), 'Change')}</th></tr></thead><tbody>` +
+    (list.map(q => { const n = q.v.latest, w = q.v[r];
+      return `<tr><td class="kw">${esc(q.q)}${q.brand ? '<span class="tag">brand</span>' : ''}</td><td class="n">${N(n[0])}</td><td class="n hp">${N(n[1])}</td><td class="n">${n[2].toFixed(1)}</td><td class="n">${w ? chip(dPos(n[2], w[2])) : chip({t:'New', c:'good'})}</td></tr>`; }).join('') ||
+     '<tr><td colspan="5" class="muted">No searches with enough views in this period yet.</td></tr>') + '</tbody></table>';
 }
 
 // ---------- charts ----------
@@ -356,15 +405,15 @@ function drawCharts(b){
   for (const k in S.charts) { S.charts[k].destroy(); delete S.charts[k]; }
   if (!window.Chart && document.readyState !== 'complete'){ window.addEventListener('load', () => { if (S.brand === b.id) drawCharts(b); }, {once:true}); return; }
   if (!window.Chart){ for (const id of ['chRank','chWeek','chMonth']) { const el = $('#' + id); if (el) el.parentElement.innerHTML = '<p class="muted">The chart could not load. The tables still show every number.</p>'; } return; }
-  const accent = b.accent, cmp = css('--cmp'), grid = '#E9EEF0', ink = '#13222A';
+  const accent = b.accent, cmp = css('--cmp'), grid = '#E9EEF0', ink = '#13222A', p = per(b);
   Chart.defaults.font.family = 'Inter, system-ui, sans-serif'; Chart.defaults.color = '#5C6C74';
-  const bk = S.rank === 'all' ? b.buckets : b.buckets_nb;
-  S.charts.rank = new Chart($('#chRank'), {type:'bar', data:{labels:BL, datasets:[
-      {label:cmpName(), data:bk[S.cmp], backgroundColor:cmp, borderRadius:6, maxBarThickness:46},
-      {label:'Last 28 days', data:bk.latest, backgroundColor:accent, borderRadius:6, maxBarThickness:46}]},
+  const bk = S.rank === 'all' ? p.bands : p.bands_nb;
+  S.charts.rank = new Chart($('#chRank'), {type:'bar', data:{labels:S.data.bands, datasets:[
+      {label:cmpName(b), data:bk[role()], backgroundColor:cmp, borderRadius:6, maxBarThickness:42},
+      {label:nowName(), data:bk.latest, backgroundColor:accent, borderRadius:6, maxBarThickness:42}]},
     options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{boxWidth:12, boxHeight:12, usePointStyle:true, pointStyle:'rectRounded'}},
       tooltip:{callbacks:{label:c => ` ${c.dataset.label}: ${N(c.raw)} searches`}}},
-      scales:{x:{grid:{display:false}}, y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}}});
+      scales:{x:{grid:{display:false}, ticks:{maxRotation:0, autoSkip:false, font:{size:11}}}, y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}}});
   const wk = b.weekly, si = wk.findIndex(w => w.from <= S.data.started && S.data.started <= w.to);
   S.charts.week = new Chart($('#chWeek'), {type:'line', data:{labels:wk.map(w => dm(w.from)), datasets:[{label:S.tm === 'c' ? 'Clicks' : 'Views', data:wk.map(w => w[S.tm]),
       borderColor:accent, backgroundColor:accent + '22', fill:true, tension:.3, pointRadius:3, pointHoverRadius:5, pointBackgroundColor:accent}]},
@@ -390,20 +439,26 @@ function route(){
 async function unlock(pw, silent){
   const btn = $('#unlockbtn'), err = $('#lockerr');
   btn.disabled = true; btn.textContent = 'Opening...'; err.textContent = '';
-  try { S.data = await decrypt(pw); store.set('lnc_pw', pw); try { S.cmp = store.get('lnc_cmp') || 'previous'; } catch (e) {} route(); }
+  try {
+    S.data = await decrypt(pw); store.set('lnc_pw', pw);
+    const sp = store.get('lnc_period'), sc = store.get('lnc_cmp');
+    if (PIDS.includes(sp)) S.period = sp; if (sc === 'previous' || sc === 'start') S.cmp = sc;
+    route();
+  }
   catch (e) { store.del('lnc_pw'); if (!silent) err.textContent = e.message === 'password' ? 'That password did not work. Check it and try again.' : 'The data could not load. Check the connection and reload the page.'; show('lock'); }
   finally { btn.disabled = false; btn.textContent = 'Open dashboard'; }
 }
-$('#lockform').addEventListener('submit', e => { e.preventDefault(); const pw = $('#pw').value; if (pw) unlock(pw, false); });
+$('#lockform').addEventListener('submit', e => { e.preventDefault(); const pw = $('#pw').value; if (pw.trim()) unlock(pw, false); });
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-act],[data-cmp],[data-rank],[data-tm],[data-mm],[data-tq]');
+  const t = e.target.closest('[data-act],[data-cmp],[data-period],[data-rank],[data-tm],[data-mm],[data-tq]');
   if (!t) return;
   const b = S.data && S.data.brands.find(x => x.id === S.brand);
   if (t.dataset.act === 'lock'){ store.del('lnc_pw'); S.data = null; $('#pw').value = ''; $('#choose').innerHTML = ''; $('#dash').innerHTML = ''; history.replaceState(null, '', location.pathname); route(); return; }
   if (!b) return;
   if (t.dataset.act === 'kwall'){ S.kwall = !S.kwall; renderKw(b); return; }
-  if (t.dataset.cmp){ S.cmp = t.dataset.cmp; store.set('lnc_cmp', S.cmp); const y = window.scrollY; renderDash(); window.scrollTo(0, y); return; }
   const y = window.scrollY;
+  if (t.dataset.period){ S.period = t.dataset.period; store.set('lnc_period', S.period); }
+  if (t.dataset.cmp){ S.cmp = t.dataset.cmp; store.set('lnc_cmp', S.cmp); }
   if (t.dataset.rank) S.rank = t.dataset.rank;
   if (t.dataset.tm) S.tm = t.dataset.tm;
   if (t.dataset.mm) S.mm = t.dataset.mm;
