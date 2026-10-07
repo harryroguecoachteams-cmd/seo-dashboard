@@ -13,7 +13,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
 <style>
 :root{--bg:#F3F5F6;--card:#FFFFFF;--ink:#13222A;--muted:#5C6C74;--faint:#8A989F;--line:#E1E7EA;--soft:#EEF2F4;
-  --accent:#1F4E51;--tint:#E4F2EF;--good:#11704F;--goodbg:#E1F3EA;--bad:#AE2A1F;--badbg:#FBEAE8;--cmp:#C3CDD2;--r:14px}
+  --accent:#1F4E51;--tint:#E4F2EF;--good:#11704F;--goodbg:#E1F3EA;--bad:#AE2A1F;--badbg:#FBEAE8;--cmp:#B9C4CA;--cmpdark:#7D8B92;--r:14px}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
@@ -78,18 +78,27 @@ label.f{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
 .fixed small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
 .olap{flex-basis:100%;font-size:13px;color:var(--muted);background:#FFF8E8;border:1px solid #F3E3B5;border-radius:10px;padding:8px 12px}
 .olap a{color:var(--accent);font-weight:600;cursor:pointer;text-decoration:underline}
+.insight{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--r);padding:16px 20px;margin-bottom:14px}
+.insight h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 8px}
+.insight ul{margin:0;padding-left:18px}
+.insight li{margin:4px 0}
+.insight b{font-weight:700}
 .grid{display:grid;gap:14px}
 .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
 .kpi .k{font-size:13px;font-weight:600;color:var(--muted)}
 .vrow{display:flex;justify-content:space-between;align-items:flex-end;gap:10px}
 .kpi .v{font-size:30px;font-weight:700;line-height:1.1;letter-spacing:-.01em}
 .kpi.small .v{font-size:24px}
-.spark{width:92px;height:30px;flex:none;overflow:visible}
+.spark{width:104px;height:34px;flex:none;overflow:visible}
 .kpi .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .kpi .was{font-size:13px;color:var(--faint)}
 .kpi .help{font-size:12.5px;color:var(--faint);line-height:1.4}
-.sparknote{font-size:12px;color:var(--faint);margin:8px 2px 0}
+.sparknote{font-size:12px;color:var(--faint);margin:8px 2px 0;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.key{display:inline-flex;align-items:center;gap:6px}
+.key i{display:inline-block;width:18px;height:0;border-top:2.5px solid var(--accent)}
+.key i.c{border-top:2px dashed var(--cmpdark)}
 .chip{display:inline-flex;align-items:center;gap:4px;font-size:12.5px;font-weight:600;padding:2px 8px;border-radius:999px;white-space:nowrap}
 .chip.good{background:var(--goodbg);color:var(--good)}
 .chip.bad{background:var(--badbg);color:var(--bad)}
@@ -100,10 +109,13 @@ label.f{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
 .sec{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;margin-top:18px}
 .sech{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:14px}
 .sech h2{font-size:19px;margin:0 0 4px;line-height:1.3}
-.sech p{margin:0;color:var(--muted);font-size:14px;max-width:680px}
+.sech p{margin:0;color:var(--muted);font-size:14px;max-width:700px}
+.tog{display:flex;gap:8px;flex-wrap:wrap}
 .split{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:center}
-.chartbox{position:relative;height:280px}
-.chartbox.tall{height:300px}
+.split.even{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.chartbox{position:relative;height:290px}
+.chartbox.tall{height:310px}
+.chartbox.short{height:200px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px}
 table{border-collapse:collapse;width:100%;font-size:14px}
 th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
@@ -113,8 +125,12 @@ td.n,th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 td.kw{font-weight:600;min-width:180px}
 td.pg{color:var(--muted);min-width:160px}
 td.url{min-width:220px;word-break:break-word}
-td.url a{text-decoration:none;color:var(--ink)}
-td.url a:hover{color:var(--accent);text-decoration:underline}
+td.url a,td.pn a{text-decoration:none;color:var(--ink)}
+td.url a:hover,td.pn a:hover{color:var(--accent);text-decoration:underline}
+td.pn{min-width:240px}
+td.pn .s{display:block;font-size:12px;color:var(--faint);margin-top:2px}
+td.tk{min-width:150px;color:var(--muted)}
+td.tk b{color:var(--ink);font-weight:600}
 tr.tot td{font-weight:700;background:#F8FAFB}
 .low{color:var(--faint);font-style:italic}
 .pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
@@ -127,21 +143,28 @@ tr.tot td{font-weight:700;background:#F8FAFB}
 .sel{font:inherit;font-size:14px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
 .more{margin-top:12px}
 .tag{font-size:11px;font-weight:600;color:var(--faint);border:1px solid var(--line);border-radius:6px;padding:1px 6px;margin-left:6px;white-space:nowrap}
+.st{display:inline-block;font-size:11.5px;font-weight:600;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.st.live{background:var(--goodbg);color:var(--good)}
+.st.wait{background:#FFF3D6;color:#8A5A00}
+.st.plan{background:var(--soft);color:var(--muted)}
+.cardnote{font-size:12.5px;color:var(--faint);margin-top:12px}
 .sm{display:none}
 .foot{color:var(--faint);font-size:12.5px;margin:26px 0 40px;line-height:1.6}
-@media (max-width:900px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.split{grid-template-columns:1fr}}
+@media (max-width:900px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:1fr}.split,.split.even{grid-template-columns:1fr}}
 @media (max-width:560px){.wrap{padding:0 16px}.head h1{font-size:26px}.h1{font-size:25px}.kpi{padding:14px}.kpi .v{font-size:23px}.kpi.small .v{font-size:20px}.sec{padding:16px}
-  .spark{width:64px;height:24px}.vrow{flex-wrap:wrap}
+  .spark{width:72px;height:26px}.vrow{flex-wrap:wrap}.insight{padding:14px 16px}
   .top{position:static}.topin{padding:10px 16px;gap:8px}.top .mark{flex:1}.top .mark span{display:none}
   .tabs{order:3;margin-left:0;width:100%}.tabs a{flex:1;text-align:center}.ghost{padding:6px 10px;font-size:13px}
   .controls{padding:12px;gap:12px}.seg button{padding:7px 9px}
-  .chartbox{height:240px}.bstats .v{font-size:22px}
+  .chartbox,.chartbox.tall{height:240px}.bstats .v{font-size:22px}
   th.pg,td.pg,th.vol,td.vol,th.hp,td.hp{display:none}th,td{padding:8px 6px}table{font-size:13px}.chip{font-size:11.5px;padding:2px 6px}
-  td.kw{min-width:0}td.url{min-width:0;word-break:break-all}.lg{display:none}.sm{display:inline}
-  table.pt,table.kt{table-layout:fixed}
+  td.kw{min-width:0}td.url{min-width:0;word-break:break-all}td.pn{min-width:0}td.tk{min-width:0}.lg{display:none}.sm{display:inline}
+  table.pt,table.kt,table.pl{table-layout:fixed}
   table.pt th:nth-child(1){width:44%}table.pt th:nth-child(2){width:16%}table.pt th:nth-child(3){width:24%}table.pt th:nth-child(5){width:16%}
   table.kt th:nth-child(1){width:38%}table.kt th:nth-child(4){width:19%}table.kt th:nth-child(5){width:19%}table.kt th:nth-child(6){width:24%}
-  table.rk td:first-child{min-width:92px}}
+  table.pl th:nth-child(1){width:46%}table.pl th:nth-child(4){width:24%}table.pl th:nth-child(5){width:30%}
+  table.rk td:first-child{min-width:92px}
+  table.qt{table-layout:fixed}table.qt th:nth-child(1){width:42%}table.qt th:nth-child(2){width:15%}table.qt th:nth-child(4){width:17%}table.qt th:nth-child(5){width:26%}}
 </style>
 </head>
 <body>
@@ -167,10 +190,13 @@ tr.tot td{font-weight:700;background:#F8FAFB}
 'use strict';
 const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const nf = new Intl.NumberFormat('en-IN');
-const PIDS = ['7', '28', '90', 'since'];
-const PSHORT = {'7':'7 days', '28':'28 days', '90':'3 months', 'since':'Since we started'};
-const PREV = {'7':'Previous 7 days', '28':'Previous 28 days', '90':'Previous 3 months'};
-const S = {data:null, brand:null, period:'28', cmp:'previous', rank:'all', kwq:'', kwb:'all', kwsort:'now', kwall:false, tm:'c', mm:'c', tq:'all', charts:{}};
+const PIDS = ['7', '14', '28', '90', 'since'];
+const PSHORT = {'7':'7 days', '14':'14 days', '28':'28 days', '90':'3 months', 'since':'Since we started'};
+const PNOW = {'7':'Last 7 days', '14':'Last 14 days', '28':'Last 28 days', '90':'Last 3 months', 'since':'Since we started'};
+const PPHRASE = {'7':'the last 7 days', '14':'the last 14 days', '28':'the last 28 days', '90':'the last 3 months', 'since':'the weeks since we started on 1 Sep'};
+const PREV = {'7':'Previous 7 days', '14':'Previous 14 days', '28':'Previous 28 days', '90':'Previous 3 months'};
+const S = {data:null, brand:null, period:'28', cmp:'previous', rank:'all', tg:'type', tmx:'c', kwq:'', kwb:'all', kwsort:'now', kwall:false,
+  pf:'live', ps:'views', tm:'c', lm:'c', tq:'all', charts:{}};
 const store = {get(k){try{return sessionStorage.getItem(k)}catch(e){return null}}, set(k,v){try{sessionStorage.setItem(k,v)}catch(e){}}, del(k){try{sessionStorage.removeItem(k)}catch(e){}}};
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -194,7 +220,8 @@ const P = iso => { const [y,m,d] = iso.split('-').map(Number); return {y,m,d}; }
 const dm = iso => { const p = P(iso); return `${p.d} ${MON[p.m-1]}`; };
 const rng = (a,b) => { const A = P(a), B = P(b); return A.y === B.y ? `${dm(a)} to ${dm(b)} ${B.y}` : `${dm(a)} ${A.y} to ${dm(b)} ${B.y}`; };
 const N = x => nf.format(x);
-const dayNum = iso => Date.UTC(...(([y,m,d]) => [y, m - 1, d])(iso.split('-').map(Number))) / 864e5;
+const dayNum = iso => { const [y,m,d] = iso.split('-').map(Number); return Date.UTC(y, m - 1, d) / 864e5; };
+const isoOf = n => new Date(n * 864e5).toISOString().slice(0, 10);
 const overlapDays = (r1, r2) => Math.max(0, Math.min(dayNum(r1[1]), dayNum(r2[1])) - Math.max(dayNum(r1[0]), dayNum(r2[0])) + 1);
 function dCount(now, was){
   if (was == null) return {t:'', c:'flat'};
@@ -213,22 +240,52 @@ function dPos(now, was, words){
 const H = (lg, sm) => `<span class="lg">${lg}</span><span class="sm">${sm}</span>`;
 const chip = d => `<span class="chip ${d.c}">${d.t}</span>`;
 function bandOf(p){ const r = Math.floor(p + 0.5); return r <= 3 ? 0 : r <= 10 ? 1 : r <= 20 ? 2 : r <= 50 ? 3 : 4; }
-function css(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
 const per = b => b.periods[S.period];
 const role = () => S.period === 'since' ? 'start' : S.cmp;
-function nowName(){ return S.period === 'since' ? 'Since we started' : ({'7':'Last 7 days','28':'Last 28 days','90':'Last 3 months'})[S.period]; }
+const nowName = () => PNOW[S.period];
 function cmpName(b){ const p = per(b); return S.period === 'since' ? `The ${p.days} days before` : S.cmp === 'previous' ? PREV[S.period] : 'Before we started'; }
-function spark(vals, color, invert){
-  const v = vals.map(x => x == null ? null : +x), ok = v.filter(x => x != null);
-  if (ok.length < 2) return '';
-  const lo = Math.min(...ok), hi = Math.max(...ok), W = 92, Hh = 30, pad = 3;
+function cmpPhrase(b){ const p = per(b); return S.period === 'since' || S.cmp === 'start' ? `the ${p.days} days before we started` : `the ${PREV[S.period].toLowerCase().replace('previous ', '')} before`; }
+function changeWords(now, was, unit){
+  if (!was) return now ? 'new this period' : 'no change';
+  const p = (now / was - 1) * 100;
+  if (Math.abs(p) < 3) return `about the same as ${unit}`;
+  return `${p > 0 ? 'up' : 'down'} ${Math.abs(p).toFixed(0)}% on ${unit}`;
+}
+
+// ---------- day-level series: every chart is cut from the chosen period ----------
+function bucketsFor(range){
+  const n = dayNum(range[1]) - dayNum(range[0]) + 1, step = n <= 35 ? 1 : 7, out = [];
+  for (let s = 0; s < n; s += step) out.push([isoOf(dayNum(range[0]) + s), isoOf(dayNum(range[0]) + Math.min(s + step, n) - 1)]);
+  return {step, buckets: out};
+}
+function seriesFor(b, range, m){
+  const D = b.days, idx = {};
+  D.d.forEach((d, i) => idx[d] = i);
+  return bucketsFor(range).buckets.map(([a, z]) => {
+    const i0 = idx[a], i1 = idx[z];
+    if (i0 == null || i1 == null) return null;
+    let c = 0, im = 0, pw = 0, pi = 0, nbc = 0, nbi = 0, q = 0, n = 0;
+    for (let i = i0; i <= i1; i++) {
+      c += D.c[i]; im += D.i[i]; nbc += D.nbc[i]; nbi += D.nbi[i]; q += D.q[i]; n++;
+      if (D.p[i] != null && D.i[i]) { pw += D.p[i] * D.i[i]; pi += D.i[i]; }
+    }
+    if (m === 'c') return c; if (m === 'i') return im; if (m === 'nbc') return nbc; if (m === 'nbi') return nbi;
+    if (m === 'ctr') return im ? c / im * 100 : null; if (m === 'pos') return pi ? pw / pi : null; if (m === 'q') return n ? q / n : null;
+    return null;
+  });
+}
+function spark(cur, cmp, color, invert){
+  const all = cur.concat(cmp).filter(x => x != null);
+  if (cur.filter(x => x != null).length < 2) return '';
+  const lo = Math.min(...all), hi = Math.max(...all), W = 104, Hh = 34, pad = 3;
   const y = x => { const t = hi === lo ? 0.5 : (x - lo) / (hi - lo); return pad + (invert ? t : 1 - t) * (Hh - 2 * pad); };
-  const pts = v.map((x, i) => x == null ? null : [(i / (v.length - 1)) * (W - 2 * pad) + pad, y(x)]).filter(Boolean);
-  const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
-  const l = pts[pts.length - 1];
-  return `<svg class="spark" viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none" role="img" aria-label="Last 12 weeks"><title>Week by week, last 12 weeks</title>
-    <path d="${d}" fill="none" stroke="${color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
-    <circle cx="${l[0].toFixed(1)}" cy="${l[1].toFixed(1)}" r="2.6" fill="${color}"/></svg>`;
+  const path = v => { const pts = v.map((x, i) => x == null ? null : [(i / Math.max(1, v.length - 1)) * (W - 2 * pad) + pad, y(x)]).filter(Boolean);
+    return {d: pts.map((p, i) => `${i ? 'L' : 'M'}${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' '), last: pts[pts.length - 1]}; };
+  const a = path(cur), c = cmp.filter(x => x != null).length > 1 ? path(cmp) : null;
+  return `<svg class="spark" viewBox="0 0 ${W} ${Hh}" preserveAspectRatio="none" role="img" aria-label="Trend in this period"><title>This period (solid) against the comparison (dashed)</title>
+    ${c ? `<path d="${c.d}" fill="none" stroke="#9AA7AE" stroke-width="1.5" stroke-dasharray="3 3" vector-effect="non-scaling-stroke"/>` : ''}
+    <path d="${a.d}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+    <circle cx="${a.last[0].toFixed(1)}" cy="${a.last[1].toFixed(1)}" r="2.6" fill="${color}"/></svg>`;
 }
 
 // ---------- screens ----------
@@ -244,13 +301,14 @@ function renderChoose(){
   document.documentElement.style.setProperty('--accent', '#1F4E51'); document.documentElement.style.setProperty('--tint', '#E4F2EF');
   $('#choose').innerHTML = topbar(null) + `<main class="wrap"><h1 class="h1">Choose a brand</h1>
     <p class="lede">How each site is doing in Google Search. The cards show the last 28 days against the 28 days before. Updated ${esc(d.updated)}, refreshed every Monday.</p>
-    <div class="brands">${d.brands.map(b => { const p = b.periods['28'], L = b.win[p.latest], V = b.win[p.previous], s = b.periods.since, SL = b.win[s.latest], SB = b.win[s.start]; return `
+    <div class="brands">${d.brands.map(b => { const p = b.periods['28'], L = b.win[p.latest], V = b.win[p.previous], s = b.periods.since, SL = b.win[s.latest], SB = b.win[s.start];
+      const live = b.plan.filter(i => i.live).length; return `
       <a class="bcard" href="#${b.id}" style="--accent:${b.accent};--tint:${b.tint}">
         <div class="bname">${esc(b.name)}</div><div class="bdom">${esc(b.domain)}</div>
         <div class="bstats"><div><div class="muted" style="font-size:13px">Clicks from Google</div><div class="v">${N(L.clicks)}</div>${chip(dCount(L.clicks, V.clicks))}</div>
         <div><div class="muted" style="font-size:13px">Views in Google</div><div class="v">${N(L.impr)}</div>${chip(dCount(L.impr, V.impr))}</div></div>
         <div class="bsince">Since we started on 1 Sep: <b>${N(SL.clicks)} clicks</b> against ${N(SB.clicks)} in the ${s.days} days before ${chip(dCount(SL.clicks, SB.clicks))}</div>
-        <div class="bfoot"><span>October plan: ${b.facts.done[0]} of ${b.facts.done[1]} live</span><span class="go">Open dashboard →</span></div></a>`; }).join('')}</div>
+        <div class="bfoot"><span>October plan: ${live} of ${b.plan.length} live</span><span class="go">Open dashboard →</span></div></a>`; }).join('')}</div>
     <p class="note">Last 28 days: ${rng(...d.brands[0].win[d.brands[0].periods['28'].latest].range)}. Google publishes Search Console data two to three days late.</p></main>`;
   show('choose');
 }
@@ -262,55 +320,90 @@ function kpi(label, now, was, kind, help, sp, small){
   return `<div class="kpi${small ? ' small' : ''}"><div class="k">${label}</div><div class="vrow"><div class="v">${v}</div>${sp || ''}</div>
     <div class="row">${chip(dl)}<span class="was">was ${w}</span></div><div class="help">${help}</div></div>`;
 }
+function planStats(b){
+  const p = per(b), L = p.latest;
+  const live = b.plan.filter(i => i.live), showing = live.filter(i => i.w[L] && i.w[L][1] > 0);
+  const kwIdx = {}; b.keywords.forEach(k => kwIdx[k.kw.toLowerCase()] = k);
+  const best = it => { let o = null; for (const [kw] of it.kws) { const k = kwIdx[kw.toLowerCase()]; const x = k && k.w[L]; if (x && (!o || x[0] < o.p)) o = {p:x[0], v:x[1], kw}; } return o; };
+  const page1 = live.filter(i => { const x = best(i); return x && x.p < 10.5; });
+  return {live, showing, page1, best, kwIdx};
+}
+function insights(b){
+  const p = per(b), L = b.win[p.latest], C = b.win[p[role()]], cp = cmpPhrase(b);
+  const bk = p.bands, p1n = bk.latest[0] + bk.latest[1], p1w = bk[role()][0] + bk[role()][1];
+  const ps = planStats(b), tt = L.tt, totalV = tt.reduce((a, x) => a + x[1], 0), artV = tt[3][1];
+  const li = [];
+  li.push(`People clicked through to the site from Google <b>${N(L.clicks)} times</b> in ${PPHRASE[S.period]}, ${changeWords(L.clicks, C.clicks, cp)}.`);
+  li.push(`Pages of the site were shown in Google results <b>${N(L.impr)} times</b>, ${changeWords(L.impr, C.impr, cp)}.`);
+  li.push(`<b>${N(p1n)} searches</b> showed the site on page one of Google (positions 1 to 10), against ${N(p1w)} in ${cp}.`);
+  if (totalV && artV / totalV >= 0.2) li.push(`Articles brought <b>${Math.round(artV / totalV * 100)}% of all views</b> in this period.`);
+  li.push(`<b>${ps.live.length} of ${b.plan.length}</b> pages and articles in the October plan are live; ${ps.showing.length ? `${ps.showing.length} of them already appear in Google in this period` : 'new pages usually take one to three weeks to start appearing in Google'}.`);
+  return `<div class="insight"><h2>In short</h2><ul>${li.map(x => `<li>${x}</li>`).join('')}</ul></div>`;
+}
 function renderDash(){
   const d = S.data, b = d.brands.find(x => x.id === S.brand);
   if (!b){ location.hash = ''; return; }
   document.documentElement.style.setProperty('--accent', b.accent); document.documentElement.style.setProperty('--tint', b.tint);
   const p = per(b), L = b.win[p.latest], C = b.win[p[role()]], f = b.facts, ac = b.accent;
-  const sw = b.weekly.slice(-12), col = k => sw.map(w => w[k]);
+  const sp = (m, inv) => spark(seriesFor(b, L.range, m), seriesFor(b, C.range, m), ac, inv);
   const pbtn = pid => { const q = b.periods[pid], r = b.win[q.latest].range; return `<button type="button" data-period="${pid}" aria-pressed="${S.period === pid}">${PSHORT[pid]}<small>${pid === 'since' ? 'from ' + dm(r[0]) : rng(...r)}</small></button>`; };
   const cbtn = (k, label) => `<button type="button" data-cmp="${k}" aria-pressed="${S.cmp === k}">${label}<small>${rng(...b.win[p[k]].range)}</small></button>`;
-  let cmpCtl;
-  if (S.period === 'since') cmpCtl = `<div class="fixed">The ${p.days} days before we started<small>${rng(...b.win[p.start].range)}</small></div>`;
-  else cmpCtl = `<div class="seg" role="group" aria-label="Compare with">${cbtn('previous', PREV[S.period])}${cbtn('start', 'Before we started')}</div>`;
+  const cmpCtl = S.period === 'since' ? `<div class="fixed">The ${p.days} days before we started<small>${rng(...b.win[p.start].range)}</small></div>`
+    : `<div class="seg" role="group" aria-label="Compare with">${cbtn('previous', PREV[S.period])}${cbtn('start', 'Before we started')}</div>`;
   let olap = '';
   if (S.period !== 'since'){
     const o = overlapDays(b.win[p.previous].range, b.win[p.start].range);
     if (o > 0) olap = `<div class="olap">The ${PREV[S.period].toLowerCase()} and the ${p.days} days before we started share ${o} of their ${p.days} days, so both comparisons show similar numbers for now. For a clean before and after, use <a data-period="since">Since we started</a>.</div>`;
   }
-  const pct = Math.round(f.done[0] / f.done[1] * 100);
+  const gran = bucketsFor(L.range).step === 1 ? 'day by day' : 'week by week';
+  const ps = planStats(b);
   $('#dash').innerHTML = topbar(b.id) + `<main class="wrap">
   <div class="head"><div><h1>${esc(b.name)}</h1><div class="sub"><a href="https://${esc(b.domain)}/" target="_blank" rel="noopener">${esc(b.domain)}</a> · ${nowName()}: ${rng(...L.range)}</div></div></div>
   <div class="controls">
     <div class="ctl"><span class="k">Period</span><div class="seg" role="group" aria-label="Period">${PIDS.map(pbtn).join('')}</div></div>
     <div class="ctl"><span class="k">Compare with</span>${cmpCtl}</div>${olap}
   </div>
+  ${insights(b)}
 
   <div class="grid g4">
-    ${kpi('Clicks from Google', L.clicks, C.clicks, 'n', 'People who clicked a result for the site.', spark(col('c'), ac))}
-    ${kpi('Views in Google', L.impr, C.impr, 'n', 'Times a page of the site was shown in results.', spark(col('i'), ac))}
-    ${kpi('Click rate', L.ctr, C.ctr, 'ctr', 'Share of views that became a click.', spark(col('ctr'), ac))}
-    ${kpi('Average position', L.pos, C.pos, 'pos', 'Lower is better. Page one is positions 1 to 10.', spark(col('pos'), ac, true))}
+    ${kpi('Clicks from Google', L.clicks, C.clicks, 'n', 'People who clicked a result for the site.', sp('c'))}
+    ${kpi('Views in Google', L.impr, C.impr, 'n', 'Times a page of the site was shown in results.', sp('i'))}
+    ${kpi('Click rate', L.ctr, C.ctr, 'ctr', 'Share of views that became a click.', sp('ctr'))}
+    ${kpi('Average position', L.pos, C.pos, 'pos', 'Lower is better. Page one is positions 1 to 10.', sp('pos', true))}
   </div>
   <div class="grid g4" style="margin-top:14px">
-    ${kpi('Clicks without the brand name', L.nb_clicks, C.nb_clicks, 'n', 'New customers who did not search for the name.', spark(col('nbc'), ac), 1)}
-    ${kpi('Views without the brand name', L.nb_impr, C.nb_impr, 'n', 'Shown to people still choosing a brand.', spark(col('nbi'), ac), 1)}
-    ${kpi('Different searches showing the site', L.queries, C.queries, 'n', 'More searches means wider reach.', spark(col('q'), ac), 1)}
+    ${kpi('Clicks without the brand name', L.nb_clicks, C.nb_clicks, 'n', 'New customers who did not search for the name.', sp('nbc'), 1)}
+    ${kpi('Views without the brand name', L.nb_impr, C.nb_impr, 'n', 'Shown to people still choosing a brand.', sp('nbi'), 1)}
+    ${kpi('Different searches showing the site', L.queries, C.queries, 'n', 'More searches means wider reach.', sp('q'), 1)}
     <div class="kpi small"><div class="k">Pages in Google's index</div><div class="vrow"><div class="v">${esc(f.indexed[1])}</div></div><div class="help">At the start: ${esc(f.indexed[0])}. Indexed pages can appear in search.</div></div>
   </div>
-  <p class="sparknote">The small lines show the last 12 weeks, week by week. For position, up means better.</p>
-  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));margin-top:8px">
-    <div class="kpi small"><div class="k">October plan: pages and articles live</div><div class="v">${f.done[0]} of ${f.done[1]}</div><div class="bar"><i style="width:${pct}%"></i></div><div class="help">${pct}% of this month's planned work is live on the site.</div></div>
-    <div class="kpi small"><div class="k">Domain Rating (Ahrefs, 0 to 100)</div><div class="v">${esc(String(f.dr[1]).split(' (')[0])}</div><div class="help">Strength of links pointing to the site, ${esc((String(f.dr[1]).split(' (')[1] || '').replace(')', ''))}. It moves over months, not weeks.</div></div>
-  </div>
+  <div class="sparknote"><span class="key"><i></i>${nowName()}, ${gran}</span><span class="key"><i class="c"></i>${cmpName(b)}</span><span>For position, up means better.</span></div>
 
-  <section class="sec"><div class="sech"><div><h2>Where the site ranks in Google</h2>
+  <section class="sec"><div class="sech"><div><h2>Are more people finding the site?</h2><p>${nowName()} ${gran}, against ${cmpPhrase(b)}. Both lines change with the period and comparison you choose above.</p></div>
+    <div class="seg" role="group" aria-label="Measure">${[['c','Clicks'],['i','Views'],['nbc','Clicks without brand'],['nbi','Views without brand']].map(([k, l]) => `<button type="button" data-tm="${k}" aria-pressed="${S.tm === k}">${l}</button>`).join('')}</div></div>
+    <div class="chartbox tall"><canvas id="chTrend" aria-label="Trend for the chosen period"></canvas></div></section>
+
+  <section class="sec"><div class="sech"><div><h2>Where does the traffic come from?</h2><p id="tgNote"></p></div>
+    <div class="tog"><div class="seg" role="group" aria-label="Group by"><button type="button" data-tg="type" aria-pressed="${S.tg === 'type'}">By page type</button><button type="button" data-tg="band" aria-pressed="${S.tg === 'band'}">By position in Google</button></div>
+    <div class="seg" role="group" aria-label="Measure"><button type="button" data-tmx="c" aria-pressed="${S.tmx === 'c'}">Clicks</button><button type="button" data-tmx="i" aria-pressed="${S.tmx === 'i'}">Views</button></div></div></div>
+    <div class="split even"><div class="chartbox"><canvas id="chTraffic" aria-label="Traffic by group"></canvas></div><div class="tw" id="trafficTable"></div></div></section>
+
+  <section class="sec"><div class="sech"><div><h2>Where does the site rank?</h2>
     <p>Searches that showed the site at least ${p.min_views} times in the period, grouped by their average position. Page one of Google is positions 1 to 10, page two is 11 to 20.</p></div>
     <div class="seg" role="group" aria-label="Searches"><button type="button" data-rank="all" aria-pressed="${S.rank === 'all'}">All searches</button><button type="button" data-rank="nb" aria-pressed="${S.rank === 'nb'}">Without the brand name</button></div></div>
     <div class="split"><div class="chartbox"><canvas id="chRank" aria-label="Searches by position"></canvas></div><div class="tw" id="rankTable"></div></div></section>
 
-  <section class="sec"><div class="sech"><div><h2>Tracked keywords</h2>
-    <p>The ${b.keywords.length} keywords our October plan pages are built to win, with Google's average position in each period. 1 is the top of the page.</p></div></div>
+  <section class="sec"><div class="sech"><div><h2>How are our new pages and articles doing?</h2>
+    <p>Every page and article in the October plan: whether it is live, the keyword it targets, its best position in Google and how often Google showed it in the period.</p></div></div>
+    <div class="pills"><div class="pill good"><b>${ps.live.length} of ${b.plan.length}</b>live</div><div class="pill"><b>${ps.showing.length}</b>live and showing in Google</div><div class="pill good"><b>${ps.page1.length}</b>on page one for a target keyword</div></div>
+    <div class="bar" style="margin:-4px 0 14px"><i style="width:${Math.round(ps.live.length / b.plan.length * 100)}%"></i></div>
+    <div class="tools"><select class="sel" id="pf" aria-label="Show">${[['live','Live pages and articles'],['plan','Not live yet'],['all','All in the plan']].map(([v,l]) => `<option value="${v}"${S.pf === v ? ' selected' : ''}>${l}</option>`).join('')}</select>
+      <select class="sel" id="psort" aria-label="Sort">${[['views','Sort: most views'],['pos','Sort: best position'],['plan','Sort: plan order']].map(([v,l]) => `<option value="${v}"${S.ps === v ? ' selected' : ''}>${l}</option>`).join('')}</select></div>
+    <div class="tw"><table class="pl"><thead><tr><th>Page or article</th><th class="hp">Status</th><th class="hp">Target keyword</th><th class="n">${H('Best position now', 'Best spot')}</th><th class="n">${H('Views in Google', 'Views')}</th><th class="n hp">${H('vs ' + cmpName(b).toLowerCase(), 'Change')}</th></tr></thead><tbody id="planBody"></tbody></table></div>
+    <div class="cardnote">Best position: the highest place any of the page's target keywords reached in the period. Views: how often Google showed the page itself.</div></section>
+
+  <section class="sec"><div class="sech"><div><h2>Which keywords are we targeting?</h2>
+    <p>All ${b.keywords.length} keywords our October plan pages are built to win, with Google's average position in each period. 1 is the top of the page.</p></div></div>
     <div class="pills" id="kwPills"></div>
     <div class="tools"><input class="inp" id="kwq" type="search" placeholder="Search keywords or pages" value="${esc(S.kwq)}" aria-label="Search keywords or pages">
       <select class="sel" id="kwb" aria-label="Position now">${[['all','All positions'],['0','Top 3 now'],['1','4 to 10 now'],['2','11 to 20 now'],['3','21 to 50 now'],['4','51 and lower now'],['none','Not showing yet']].map(([v,l]) => `<option value="${v}"${S.kwb === v ? ' selected' : ''}>${l}</option>`).join('')}</select>
@@ -318,13 +411,11 @@ function renderDash(){
     <div class="tw"><table class="kt"><thead><tr><th>Keyword</th><th class="pg">Page</th><th class="n vol">Searches a month</th><th class="n">${H(cmpName(b), 'Before')}</th><th class="n">${H(nowName(), 'Now')}</th><th class="n">Change</th></tr></thead><tbody id="kwBody"></tbody></table></div>
     <div class="more" id="kwMore"></div></section>
 
-  <section class="sec"><div class="sech"><div><h2>Week by week</h2><p>The last 26 weeks, 7 days each, ending ${dm(b.last)}. The line marks when our work began.</p></div>
-    <div class="seg" role="group" aria-label="Measure"><button type="button" data-tm="c" aria-pressed="${S.tm === 'c'}">Clicks</button><button type="button" data-tm="i" aria-pressed="${S.tm === 'i'}">Views</button></div></div>
-    <div class="chartbox tall"><canvas id="chWeek" aria-label="Weekly trend"></canvas></div></section>
+  <section class="sec" id="linksSec"></section>
 
-  <section class="sec"><div class="sech"><div><h2>Month by month</h2><p>Every month Google has data for. Months since we started are in color; the first and the current month are part months.</p></div>
-    <div class="seg" role="group" aria-label="Measure"><button type="button" data-mm="c" aria-pressed="${S.mm === 'c'}">Clicks</button><button type="button" data-mm="i" aria-pressed="${S.mm === 'i'}">Views</button></div></div>
-    <div class="chartbox tall"><canvas id="chMonth" aria-label="Monthly history"></canvas></div></section>
+  <section class="sec"><div class="sech"><div><h2>The long view</h2><p>Every week Google has data for. The period you chose is in color and what it is compared with is in dark gray; the line marks when our work began.</p></div>
+    <div class="seg" role="group" aria-label="Measure"><button type="button" data-lm="c" aria-pressed="${S.lm === 'c'}">Clicks</button><button type="button" data-lm="i" aria-pressed="${S.lm === 'i'}">Views</button></div></div>
+    <div class="chartbox tall"><canvas id="chLong" aria-label="All weeks"></canvas></div></section>
 
   <section class="sec"><div class="sech"><div><h2>Top pages</h2><p>Pages with the most clicks in the period.</p></div></div>
     <div class="tw" id="pagesTable"></div></section>
@@ -336,10 +427,21 @@ function renderDash(){
   <p class="foot">Source: Google Search Console, final data to ${dm(b.last)} ${P(b.last).y}. Positions are Google's averages over each period. Indexed pages come from Google's URL Inspection tool and Domain Rating from Ahrefs, on the dates shown. Prepared by LocknCode. Updated ${esc(d.updated)}; the numbers refresh automatically every Monday.</p>
   </main>`;
   show('dash');
-  renderRank(b); renderKw(b); renderPages(b); renderQueries(b); drawCharts(b);
+  renderTraffic(b); renderRank(b); renderPlan(b); renderKw(b); renderLinks(b); renderPages(b); renderQueries(b); drawCharts(b);
 }
 
 // ---------- sections ----------
+function renderTraffic(b){
+  const p = per(b), Lw = b.win[p.latest], Cw = b.win[p[role()]], k = S.tmx === 'c' ? 0 : 1;
+  const labels = S.tg === 'type' ? S.data.types : S.data.bands, now = (S.tg === 'type' ? Lw.tt : Lw.tb).map(x => x[k]), was = (S.tg === 'type' ? Cw.tt : Cw.tb).map(x => x[k]);
+  const tn = now.reduce((a, x) => a + x, 0), tw = was.reduce((a, x) => a + x, 0), unit = S.tmx === 'c' ? 'clicks' : 'views';
+  $('#tgNote').textContent = S.tg === 'type'
+    ? `Google ${unit} split by the kind of page people landed on, ${nowName().toLowerCase()} against ${cmpPhrase(b)}. Collections include category and brand pages.`
+    : `Google ${unit} split by where the site ranked for each search, like the keyword bands below. Google keeps rare searches private, so this adds up to a little less than the total.`;
+  $('#trafficTable').innerHTML = `<table class="rk"><thead><tr><th>${S.tg === 'type' ? 'Page type' : 'Position'}</th><th class="n">${H(cmpName(b), 'Before')}</th><th class="n">${H(nowName(), 'Now')}</th><th class="n">Change</th><th class="n hp">Share now</th></tr></thead><tbody>` +
+    labels.map((l, i) => `<tr><td>${l}</td><td class="n">${N(was[i])}</td><td class="n">${N(now[i])}</td><td class="n">${chip(dCount(now[i], was[i]))}</td><td class="n hp">${tn ? Math.round(now[i] / tn * 100) : 0}%</td></tr>`).join('') +
+    `<tr class="tot"><td>Total</td><td class="n">${N(tw)}</td><td class="n">${N(tn)}</td><td class="n">${chip(dCount(tn, tw))}</td><td class="n hp">100%</td></tr></tbody></table>`;
+}
 function renderRank(b){
   const p = per(b), bk = S.rank === 'all' ? p.bands : p.bands_nb, BL = S.data.bands;
   const was = bk[role()], now = bk.latest;
@@ -349,6 +451,24 @@ function renderRank(b){
   $('#rankTable').innerHTML = `<table class="rk"><thead><tr><th>Position</th><th class="n">${H(cmpName(b), 'Before')}</th><th class="n">${H(nowName(), 'Now')}</th><th class="n">Change</th></tr></thead><tbody>${rows}
     <tr class="tot"><td>On page one (1 to 10)</td><td class="n">${N(p1w)}</td><td class="n">${N(p1n)}</td><td class="n">${chip(dCount(p1n, p1w))}</td></tr>
     <tr class="tot"><td>All searches counted</td><td class="n">${N(sw)}</td><td class="n">${N(sn)}</td><td class="n">${chip(dCount(sn, sw))}</td></tr></tbody></table>`;
+}
+function renderPlan(b){
+  const p = per(b), L = p.latest, Cw = p[role()], ps = planStats(b);
+  let rows = b.plan.map((it, i) => ({it, i, best: ps.best(it), now: it.w[L] || null, was: it.w[Cw] || null}));
+  rows = rows.filter(r => S.pf === 'all' || (S.pf === 'live' ? r.it.live : !r.it.live));
+  if (S.ps === 'views') rows.sort((a, c) => (c.now ? c.now[1] : -1) - (a.now ? a.now[1] : -1) || a.i - c.i);
+  else if (S.ps === 'pos') rows.sort((a, c) => (a.best ? a.best.p : 1e9) - (c.best ? c.best.p : 1e9) || a.i - c.i);
+  else rows.sort((a, c) => a.i - c.i);
+  $('#planBody').innerHTML = rows.map(r => {
+    const it = r.it, main = it.kws.slice().sort((a, c) => (c[1] || 0) - (a[1] || 0))[0];
+    const status = it.live ? (r.now && r.now[1] ? '<span class="st live">Live</span>' : '<span class="st wait">Live, waiting for Google</span>') : '<span class="st plan">Planned</span>';
+    const best = r.best ? `${r.best.p.toFixed(1)}<span class="s" style="display:block;font-size:12px;color:var(--faint);white-space:normal">${esc(r.best.kw)}</span>` : '<span class="muted">not yet</span>';
+    const views = r.now ? N(r.now[1]) : '<span class="muted">0</span>';
+    const ch = r.now ? (r.was ? chip(dCount(r.now[1], r.was[1])) : chip({t:'New', c:'good'})) : '';
+    return `<tr><td class="pn"><a href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.name)}</a><span class="s">${esc(it.section)}</span><span class="sm" style="margin-top:4px">${status}</span></td>
+      <td class="hp">${status}</td><td class="tk hp">${main ? `<b>${esc(main[0])}</b><br>${main[1] ? N(main[1]) + ' searches a month' : 'volume not measured'}` : ''}</td>
+      <td class="n">${best}</td><td class="n">${views}</td><td class="n hp">${ch}</td></tr>`; }).join('') ||
+    `<tr><td colspan="6" class="muted">${S.pf === 'plan' ? 'Everything in the plan is live.' : 'Nothing here yet.'}</td></tr>`;
 }
 function kwRows(b){
   const p = per(b), Lw = p.latest, Cw = p[role()];
@@ -378,6 +498,20 @@ function renderKw(b){
     '<tr><td colspan="6" class="muted">No keywords match.</td></tr>';
   $('#kwMore').innerHTML = rows.length > 30 ? `<button class="ghost" type="button" data-act="kwall">${S.kwall ? 'Show fewer' : `Show all ${rows.length}`}</button>` : '';
 }
+function renderLinks(b){
+  const g = (b.links && b.links.google) || [], a = (b.links && b.links.ahrefs) || [], last = g[g.length - 1], prev = g.length > 1 ? g[g.length - 2] : null;
+  const dr = a.filter(x => x.dr != null), drl = dr[dr.length - 1], drp = dr.length > 1 ? dr[dr.length - 2] : null;
+  const card = (label, v, was, help) => `<div class="kpi small"><div class="k">${label}</div><div class="v">${v == null ? 'n/a' : N(v)}</div>
+    <div class="row">${was != null ? chip(dCount(v, was)) + `<span class="was">was ${N(was)}</span>` : '<span class="chip flat">First check</span>'}</div><div class="help">${help}</div></div>`;
+  $('#linksSec').innerHTML = `<div class="sech"><div><h2>Are other websites linking to the site?</h2>
+    <p>Links from other websites (backlinks) tell Google the site is worth showing. We check them every two weeks, so this part does not follow the period above.</p></div></div>
+    <div class="grid g3">
+      ${last ? card('Links from other websites', last.links, prev && prev.links, `Links Google has found, checked ${dm(last.date)}${prev ? ', against ' + dm(prev.date) : ''}.`) : ''}
+      ${last ? card('Websites linking to the site', last.sites, prev && prev.sites, `Different websites behind those links, checked ${dm(last.date)}.`) : ''}
+      ${drl ? card('Domain Rating (Ahrefs, 0 to 100)', drl.dr, drp && drp.dr, `Strength of the links pointing to the site, ${dm(drl.date)}. It moves over months, not weeks.`) : ''}
+    </div>
+    ${g.length > 1 ? '<div class="chartbox short" style="margin-top:14px"><canvas id="chLinks" aria-label="Links over time"></canvas></div>' : `<div class="cardnote">The first check was on ${last ? dm(last.date) : 'n/a'}; from the next check this shows whether the number of links is growing, with a line over time.</div>`}`;
+}
 const dec = s => { try { return decodeURIComponent(s); } catch (e) { return s; } };
 function renderPages(b){
   const p = per(b), r = role();
@@ -388,7 +522,7 @@ function renderPages(b){
 function renderQueries(b){
   const p = per(b), r = role(), list = S.tq === 'all' ? p.queries : p.queries_nb;
   $('#tqNote').textContent = S.tq === 'all' ? `The searches that brought the most clicks in the period (searches with at least ${p.min_views} views).` : 'Searches without the brand name, by views: where new customers already see the site.';
-  $('#queriesTable').innerHTML = `<table><thead><tr><th>Search</th><th class="n">Clicks</th><th class="n hp">Views</th><th class="n">Position</th><th class="n">${H('vs ' + cmpName(b).toLowerCase(), 'Change')}</th></tr></thead><tbody>` +
+  $('#queriesTable').innerHTML = `<table class="qt"><thead><tr><th>Search</th><th class="n">Clicks</th><th class="n hp">Views</th><th class="n">Position</th><th class="n">${H('vs ' + cmpName(b).toLowerCase(), 'Change')}</th></tr></thead><tbody>` +
     (list.map(q => { const n = q.v.latest, w = q.v[r];
       return `<tr><td class="kw">${esc(q.q)}${q.brand ? '<span class="tag">brand</span>' : ''}</td><td class="n">${N(n[0])}</td><td class="n hp">${N(n[1])}</td><td class="n">${n[2].toFixed(1)}</td><td class="n">${w ? chip(dPos(n[2], w[2])) : chip({t:'New', c:'good'})}</td></tr>`; }).join('') ||
      '<tr><td colspan="5" class="muted">No searches with enough views in this period yet.</td></tr>') + '</tbody></table>';
@@ -404,29 +538,51 @@ const markerPlugin = {id:'startMark', afterDatasetsDraw(ch, args, o){
 function drawCharts(b){
   for (const k in S.charts) { S.charts[k].destroy(); delete S.charts[k]; }
   if (!window.Chart && document.readyState !== 'complete'){ window.addEventListener('load', () => { if (S.brand === b.id) drawCharts(b); }, {once:true}); return; }
-  if (!window.Chart){ for (const id of ['chRank','chWeek','chMonth']) { const el = $('#' + id); if (el) el.parentElement.innerHTML = '<p class="muted">The chart could not load. The tables still show every number.</p>'; } return; }
-  const accent = b.accent, cmp = css('--cmp'), grid = '#E9EEF0', ink = '#13222A', p = per(b);
+  if (!window.Chart){ for (const id of ['chTrend','chTraffic','chRank','chLong','chLinks']) { const el = $('#' + id); if (el) el.parentElement.innerHTML = '<p class="muted">The chart could not load. The tables still show every number.</p>'; } return; }
+  const accent = b.accent, cmp = '#B9C4CA', cmpDark = '#7D8B92', grid = '#E9EEF0', ink = '#13222A', p = per(b), Lr = b.win[p.latest].range, Cr = b.win[p[role()]].range;
   Chart.defaults.font.family = 'Inter, system-ui, sans-serif'; Chart.defaults.color = '#5C6C74';
-  const bk = S.rank === 'all' ? p.bands : p.bands_nb;
+  Chart.defaults.animation.duration = 350; Chart.defaults.animations.x = false;   // switching periods should feel instant, and lines grow upward, not sideways
+  const legend = {position:'bottom', labels:{boxWidth:12, boxHeight:12, usePointStyle:true, pointStyle:'rectRounded'}};
+  // 1. trend: chosen period against the comparison, bucket by bucket
+  const bk = bucketsFor(Lr), cbk = bucketsFor(Cr), tm = S.tm, unit = {c:'clicks', i:'views', nbc:'clicks without the brand name', nbi:'views without the brand name'}[tm];
+  const cur = seriesFor(b, Lr, tm), was = seriesFor(b, Cr, tm), lab = bk.buckets.map(([a, z]) => bk.step === 1 ? dm(a) : `${dm(a)}`);
+  S.charts.trend = new Chart($('#chTrend'), {type:'line', data:{labels:lab, datasets:[
+      {label:nowName(), data:cur, borderColor:accent, backgroundColor:accent + '22', fill:true, tension:.3, pointRadius:bk.step === 1 && cur.length > 20 ? 2 : 3, pointBackgroundColor:accent, borderWidth:2.5},
+      {label:cmpName(b), data:was, borderColor:cmpDark, borderDash:[6, 5], fill:false, tension:.3, pointRadius:0, borderWidth:2}]},
+    options:{responsive:true, maintainAspectRatio:false, interaction:{mode:'index', intersect:false}, plugins:{legend,
+      tooltip:{callbacks:{title:c => { const i = c[0].dataIndex, a = bk.buckets[i], z = cbk.buckets[i]; return `${bk.step === 1 ? dm(a[0]) : rng(a[0], a[1])}  vs  ${z ? (bk.step === 1 ? dm(z[0]) : rng(z[0], z[1])) : ''}`; },
+        label:c => ` ${c.dataset.label}: ${c.raw == null ? 'n/a' : N(Math.round(c.raw))} ${unit}`}}},
+      scales:{x:{grid:{display:false}, ticks:{maxRotation:0, autoSkip:true, maxTicksLimit:10}}, y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}}});
+  // 2. traffic split
+  const Lw = b.win[p.latest], Cw = b.win[p[role()]], k = S.tmx === 'c' ? 0 : 1, tl = S.tg === 'type' ? S.data.types : S.data.bands;
+  S.charts.traffic = new Chart($('#chTraffic'), {type:'bar', data:{labels:tl, datasets:[
+      {label:cmpName(b), data:(S.tg === 'type' ? Cw.tt : Cw.tb).map(x => x[k]), backgroundColor:cmp, borderRadius:6, maxBarThickness:42},
+      {label:nowName(), data:(S.tg === 'type' ? Lw.tt : Lw.tb).map(x => x[k]), backgroundColor:accent, borderRadius:6, maxBarThickness:42}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend, tooltip:{callbacks:{label:c => ` ${c.dataset.label}: ${N(c.raw)} ${S.tmx === 'c' ? 'clicks' : 'views'}`}}},
+      scales:{x:{grid:{display:false}, ticks:{maxRotation:0, autoSkip:false, font:{size:11}, callback:function(v){ const s = this.getLabelForValue(v); return s.length > 14 ? s.split(' ').reduce((acc, w) => { const l = acc[acc.length - 1]; if ((l + ' ' + w).trim().length > 14) acc.push(w); else acc[acc.length - 1] = (l + ' ' + w).trim(); return acc; }, ['']) : s; }}},
+        y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}}});
+  // 3. ranking bands
+  const rb = S.rank === 'all' ? p.bands : p.bands_nb;
   S.charts.rank = new Chart($('#chRank'), {type:'bar', data:{labels:S.data.bands, datasets:[
-      {label:cmpName(b), data:bk[role()], backgroundColor:cmp, borderRadius:6, maxBarThickness:42},
-      {label:nowName(), data:bk.latest, backgroundColor:accent, borderRadius:6, maxBarThickness:42}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'bottom', labels:{boxWidth:12, boxHeight:12, usePointStyle:true, pointStyle:'rectRounded'}},
-      tooltip:{callbacks:{label:c => ` ${c.dataset.label}: ${N(c.raw)} searches`}}},
+      {label:cmpName(b), data:rb[role()], backgroundColor:cmp, borderRadius:6, maxBarThickness:42},
+      {label:nowName(), data:rb.latest, backgroundColor:accent, borderRadius:6, maxBarThickness:42}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend, tooltip:{callbacks:{label:c => ` ${c.dataset.label}: ${N(c.raw)} searches`}}},
       scales:{x:{grid:{display:false}, ticks:{maxRotation:0, autoSkip:false, font:{size:11}}}, y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}}});
-  const wk = b.weekly, si = wk.findIndex(w => w.from <= S.data.started && S.data.started <= w.to);
-  S.charts.week = new Chart($('#chWeek'), {type:'line', data:{labels:wk.map(w => dm(w.from)), datasets:[{label:S.tm === 'c' ? 'Clicks' : 'Views', data:wk.map(w => w[S.tm]),
-      borderColor:accent, backgroundColor:accent + '22', fill:true, tension:.3, pointRadius:3, pointHoverRadius:5, pointBackgroundColor:accent}]},
+  // 4. backlinks over time, once there are two checks
+  const g = (b.links && b.links.google) || [];
+  if (g.length > 1 && $('#chLinks')) S.charts.links = new Chart($('#chLinks'), {type:'line', data:{labels:g.map(x => dm(x.date)), datasets:[
+      {label:'Links from other websites', data:g.map(x => x.links), borderColor:accent, backgroundColor:accent, tension:.2, pointRadius:4},
+      {label:'Websites linking', data:g.map(x => x.sites), borderColor:cmpDark, backgroundColor:cmpDark, borderDash:[6, 5], tension:.2, pointRadius:4}]},
+    options:{responsive:true, maintainAspectRatio:false, plugins:{legend}, scales:{x:{grid:{display:false}}, y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}}});
+  // 5. the long view: every week, the chosen period and its comparison highlighted
+  const wk = b.weekly_all, inR = (w, r) => !(w.to < r[0] || w.from > r[1]), si = wk.findIndex(w => w.from <= S.data.started && S.data.started <= w.to);
+  S.charts.long = new Chart($('#chLong'), {type:'bar', data:{labels:wk.map(w => dm(w.from) + ' ' + P(w.from).y), datasets:[{label:S.lm === 'c' ? 'Clicks' : 'Views',
+      data:wk.map(w => w[S.lm]), backgroundColor:wk.map(w => inR(w, Lr) ? accent : inR(w, Cr) ? cmpDark : '#D5DDE1'), borderRadius:3, categoryPercentage:.9, barPercentage:.9}]},
     options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, startMark:{index:si, label:'Work started, 1 Sep', color:ink},
-      tooltip:{callbacks:{title:c => { const w = wk[c[0].dataIndex]; return rng(w.from, w.to); }, label:c => ` ${N(c.raw)} ${S.tm === 'c' ? 'clicks' : 'views'}`}}},
-      scales:{x:{grid:{display:false}, ticks:{maxRotation:0, autoSkip:true, maxTicksLimit:9}}, y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}},
+      tooltip:{callbacks:{title:c => { const w = wk[c[0].dataIndex]; return rng(w.from, w.to); }, label:c => ` ${N(c.raw)} ${S.lm === 'c' ? 'clicks' : 'views'}`}}},
+      scales:{x:{grid:{display:false}, ticks:{maxRotation:0, autoSkip:true, maxTicksLimit:8, callback:function(v){ const w = wk[v]; return w ? MON[P(w.from).m - 1] + ' ' + P(w.from).y : ''; }}},
+        y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}},
     plugins:[markerPlugin]});
-  const mo = b.monthly, started = S.data.started.slice(0, 7);
-  S.charts.month = new Chart($('#chMonth'), {type:'bar', data:{labels:mo.map(m => `${MON[+m.m.slice(5) - 1]} ${m.m.slice(0, 4)}`), datasets:[{label:S.mm === 'c' ? 'Clicks' : 'Views',
-      data:mo.map(m => m[S.mm]), backgroundColor:mo.map(m => m.m >= started ? (m.partial ? accent + '99' : accent) : (m.partial ? cmp + '99' : cmp)), borderRadius:5, maxBarThickness:40}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},
-      tooltip:{callbacks:{label:c => { const m = mo[c.dataIndex]; let s = ` ${N(c.raw)} ${S.mm === 'c' ? 'clicks' : 'views'}`; if (m.partial) s += m.to ? ` (to ${dm(m.to)})` : m.from ? ` (from ${dm(m.from)})` : ' (part month)'; return s; }}}},
-      scales:{x:{grid:{display:false}, ticks:{maxRotation:0, autoSkip:true, maxTicksLimit:9}}, y:{beginAtZero:true, grid:{color:grid}, ticks:{precision:0}}}}});
 }
 
 // ---------- routing and events ----------
@@ -450,7 +606,7 @@ async function unlock(pw, silent){
 }
 $('#lockform').addEventListener('submit', e => { e.preventDefault(); const pw = $('#pw').value; if (pw.trim()) unlock(pw, false); });
 document.addEventListener('click', e => {
-  const t = e.target.closest('[data-act],[data-cmp],[data-period],[data-rank],[data-tm],[data-mm],[data-tq]');
+  const t = e.target.closest('[data-act],[data-cmp],[data-period],[data-rank],[data-tm],[data-tmx],[data-tg],[data-lm],[data-tq]');
   if (!t) return;
   const b = S.data && S.data.brands.find(x => x.id === S.brand);
   if (t.dataset.act === 'lock'){ store.del('lnc_pw'); S.data = null; $('#pw').value = ''; $('#choose').innerHTML = ''; $('#dash').innerHTML = ''; history.replaceState(null, '', location.pathname); route(); return; }
@@ -461,7 +617,9 @@ document.addEventListener('click', e => {
   if (t.dataset.cmp){ S.cmp = t.dataset.cmp; store.set('lnc_cmp', S.cmp); }
   if (t.dataset.rank) S.rank = t.dataset.rank;
   if (t.dataset.tm) S.tm = t.dataset.tm;
-  if (t.dataset.mm) S.mm = t.dataset.mm;
+  if (t.dataset.tmx) S.tmx = t.dataset.tmx;
+  if (t.dataset.tg) S.tg = t.dataset.tg;
+  if (t.dataset.lm) S.lm = t.dataset.lm;
   if (t.dataset.tq) S.tq = t.dataset.tq;
   renderDash(); window.scrollTo(0, y);
 });
@@ -474,6 +632,8 @@ document.addEventListener('change', e => {
   const b = S.data && S.data.brands.find(x => x.id === S.brand); if (!b) return;
   if (e.target.id === 'kwb'){ S.kwb = e.target.value; renderKw(b); }
   if (e.target.id === 'kws'){ S.kwsort = e.target.value; renderKw(b); }
+  if (e.target.id === 'pf'){ S.pf = e.target.value; renderPlan(b); }
+  if (e.target.id === 'psort'){ S.ps = e.target.value; renderPlan(b); }
 });
 window.addEventListener('hashchange', route);
 const saved = store.get('lnc_pw');
